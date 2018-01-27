@@ -4,7 +4,7 @@ WORKDIR /go/src/github.com/lackerman/gofileserver
 
 COPY *.go .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo .
+RUN go get -d -v golang.org/x/net/html && CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo .
 
 FROM scratch
 LABEL AUTHOR=lackerman
