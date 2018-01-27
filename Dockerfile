@@ -1,17 +1,16 @@
-FROM lackerman/gobuilder:latest as builder
-LABEL AUTHOR=lackerman
+FROM golang:1.9.3 as builder
 
-WORKDIR /go/src/github.com/lackerman/fileserver
+WORKDIR /go/src/github.com/lackerman/gofileserver
 
 COPY *.go .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo .
 
 FROM scratch
 LABEL AUTHOR=lackerman
 
-WORKDIR /root
+WORKDIR /bin
 
-COPY --from=builder /go/src/github.com/lackerman/fileserver/app .
+COPY --from=builder /go/src/github.com/lackerman/fileserver/gofileserver .
 
-CMD ["./app", "/serve"]
+CMD ["gofileserver"]
