@@ -11,6 +11,6 @@ LABEL AUTHOR=lackerman
 
 WORKDIR /bin
 
-COPY --from=builder /go/src/github.com/lackerman/fileserver/gofileserver .
+COPY --from=builder /go/src/github.com/lackerman/gofileserver/gofileserver .
 
 CMD ["gofileserver"]
